@@ -1,7 +1,8 @@
-import { useState } from "react";
+import React, { useState } from "react";
 import PropTypes from "prop-types";
+import { IErrors } from "../../ui/formTypes";
 
-const TextField = ({ name, type, value, onChange, label, error, ...rest }) => {
+const TextField = ({ name, type, value, onChange, label, error }: IErrors) => {
   const [showPassword, setShowPassword] = useState(false);
   const getInputClasses = () => {
     return "form-control" + (error ? " is-invalid" : "");
@@ -10,7 +11,7 @@ const TextField = ({ name, type, value, onChange, label, error, ...rest }) => {
     setShowPassword((prevState) => !prevState);
   };
 
-  const handleChange = ({ target }) => {
+  const handleChange = ({ target }: React.ChangeEvent<HTMLInputElement>) => {
     onChange({ name: target.name, value: target.value });
   };
 
@@ -26,7 +27,6 @@ const TextField = ({ name, type, value, onChange, label, error, ...rest }) => {
             id={name}
             value={value}
             onChange={handleChange}
-            {...rest}
           />
           {type === "password" && (
             <button
@@ -57,4 +57,4 @@ TextField.propTypes = {
   error: PropTypes.string,
 };
 
-export default React.memo(TextField);
+export default TextField;
