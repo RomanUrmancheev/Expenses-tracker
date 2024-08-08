@@ -9,18 +9,16 @@ import { Link } from "react-router-dom";
 //TODO change spotify & netflix logo
 const Main = () => {
   return (
-    <div className="container mt-2">
-      <div className="text-3xl font-extrabold mb-10">
-        <h1>
-          Structure your finance,{" "}
-          <span className="bg-clip-text text-transparent bg-gradient-to-r from-teal-400 to-blue-500">
-            today
-          </span>
-        </h1>
-      </div>
+    <div className="tw-mt-20 tw-container tw-content-center tw-m-auto">
+      <h1 className="fw-bolder fs-1 tw-mb-10">
+        Structure your finance,{" "}
+        <span className="tw-bg-clip-text tw-text-transparent tw-bg-gradient-to-r tw-from-teal-400 tw-to-blue-500">
+          today
+        </span>
+      </h1>
 
-      <div className="container mb-10 px-4 py-2 bg-cyan-50 rounded-lg border-2 border-cyan-400">
-        <div className="flex flex-col justify-around items-center">
+      <div className="container mb-4 mt-5 p-4 tw-bg-cyan-50 tw-rounded-lg tw-border-2 tw-border-cyan-400">
+        <div className="tw-flex tw-flex-col tw-justify-around tw-items-center">
           <DebitComponent logo={spotifyLogo} value={-21.98} />
           <DebitComponent logo={paypal} value={+413.16} />
           <DebitComponent logo={netflix} value={-15.49} />
@@ -32,7 +30,7 @@ const Main = () => {
       <Link to="../login">
         <button
           type="button"
-          className="text-slate-100 text-5xl font-bold rounded-lg py-6 px-8 bg-gradient-to-r from-teal-400 to-blue-500 hover:from-pink-500 hover:to-orange-500"
+          className="btn fs-1 text-white tw-bg-gradient-to-r tw-from-teal-400 tw-to-blue-500 hover:tw-from-pink-500 hover:tw-to-orange-500"
         >
           Start now
         </button>
