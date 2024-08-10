@@ -1,9 +1,9 @@
 import { useEffect, useState } from "react";
-import TextField from "../common/form/TextField";
+import { TextField } from "../common/form/TextField";
 // import { useDispatch, useSelector } from "react-redux";
 // import { getAuthError, logIn } from "../../store/users";
 import * as yup from "yup";
-import { HandleChangeProps, IErrors } from "./formTypes";
+import { HandleChangeProps, IErrors } from "../../interfaces";
 
 const LoginForm = () => {
   const [data, setData] = useState({
@@ -52,7 +52,7 @@ const LoginForm = () => {
     setTryes(1);
     const isValid = validate();
     if (!isValid) return;
-    // dispatch(logIn({ payload: data, redirect }));
+    // dispatch(logIn(data));
   };
 
   return (

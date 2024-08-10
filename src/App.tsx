@@ -9,7 +9,7 @@ function App() {
     <div>
       <Navigation />
       <Switch>
-        <Route path="/login:type?" component={Login} />
+        <Route path="/login/:type?" component={Login} />
         <Route path="/" exact component={Main} />
         <Redirect to="/" />
       </Switch>

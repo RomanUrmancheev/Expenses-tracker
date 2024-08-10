@@ -10,7 +10,7 @@ import { Link } from "react-router-dom";
 const Main = () => {
   return (
     <div className="tw-mt-20 tw-container tw-content-center tw-m-auto">
-      <h1 className="fw-bolder fs-1 tw-mb-10">
+      <h1 className="fw-bolder tw-text-6xl tw-mb-10">
         Structure your finance,{" "}
         <span className="tw-bg-clip-text tw-text-transparent tw-bg-gradient-to-r tw-from-teal-400 tw-to-blue-500">
           today
@@ -27,7 +27,7 @@ const Main = () => {
         </div>
       </div>
 
-      <Link to="../login">
+      <Link to="../login/registration">
         <button
           type="button"
           className="btn fs-1 text-white tw-bg-gradient-to-r tw-from-teal-400 tw-to-blue-500 hover:tw-from-pink-500 hover:tw-to-orange-500"

@@ -4,8 +4,13 @@ const Navigation = () => {
   return (
     <nav className="navbar mb-3 tw-bg-gradient-to-r tw-from-teal-400 tw-to-blue-500 p-4 w-full">
       <div className="container-lg">
-        <div className="text-white fs-5 tw-text-lg tw-font-bold">
-          Expenses Tracker
+        <div>
+          <Link
+            className="text-white fw-bolder nav-link fs-5 tw-text-lg"
+            to="../../"
+          >
+            Expenses Tracker
+          </Link>
         </div>
         <ul className="nav">
           <li>

@@ -1,8 +1,14 @@
 import React, { useState } from "react";
-import PropTypes from "prop-types";
-import { IErrors } from "../../ui/formTypes";
+import { ITextField } from "../../../interfaces";
 
-const TextField = ({ name, type, value, onChange, label, error }: IErrors) => {
+export const TextField = ({
+  name,
+  type,
+  value,
+  onChange,
+  label,
+  error,
+}: ITextField) => {
   const [showPassword, setShowPassword] = useState(false);
   const getInputClasses = () => {
     return "form-control" + (error ? " is-invalid" : "");
@@ -47,14 +53,3 @@ const TextField = ({ name, type, value, onChange, label, error }: IErrors) => {
 TextField.defaultProps = {
   type: "text",
 };
-
-TextField.propTypes = {
-  name: PropTypes.string.isRequired,
-  type: PropTypes.string,
-  value: PropTypes.string.isRequired,
-  onChange: PropTypes.func.isRequired,
-  label: PropTypes.string.isRequired,
-  error: PropTypes.string,
-};
-
-export default TextField;

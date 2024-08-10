@@ -1,79 +1,41 @@
 import { useEffect, useState } from "react";
-import { validator } from "../../utils/validator";
-import TextField from "../common/form/textField";
-import SelectField from "../common/form/selectField";
-import RadioField from "../common/form/radioField";
-import MultiSelectField from "../common/form/multiSelectField";
-import CheckBoxField from "../common/form/checkBoxField";
-import { useDispatch, useSelector } from "react-redux";
-import { getQualitiesList } from "../../store/qualities";
-import { getProfessions } from "../../store/professions";
-import { signUp } from "../../store/users";
+import * as yup from "yup";
+import { TextField } from "../common/form/TextField";
+import { CheckBoxField } from "../common/form/CheckBox";
+// import { useDispatch, useSelector } from "react-redux";
+// import { signUp } from "../../store/users";
+import { HandleChangeProps, IErrors } from "../../interfaces";
 
 const RegistrationForm = () => {
-  const dispatch = useDispatch();
+  // const dispatch = useDispatch();
   const [data, setData] = useState({
     email: "",
     password: "",
     name: "",
-    profession: "",
-    sex: "male",
-    qualities: [],
-    licence: false,
+    license: false,
   });
-  const [errors, setErrors] = useState({});
+  const [errors, setErrors] = useState({} as IErrors);
   const [submitTryes, setTryes] = useState(0);
-  const professions = useSelector(getProfessions());
-  const qualities = useSelector(getQualitiesList());
-  const qualitiesList = qualities.map((q) => ({
-    label: q.name,
-    value: q._id,
-  }));
 
-  const handleChange = (target) => {
-    setData((prevState) => ({ ...prevState, [target.name]: target.value }));
+  const handleChange = (inputData: HandleChangeProps) => {
+    setData((prevState) => ({
+      ...prevState,
+      [inputData.name]: inputData.value,
+    }));
   };
 
-  const validatorConfig = {
-    email: {
-      isRequired: {
-        message: "Электронный адрес обязателен для заполнения",
-      },
-      isEmail: {
-        message: "Электронный адрес указан неверно",
-      },
-    },
-    name: {
-      isRequired: {
-        message: "Имя обязательно для заполнения",
-      },
-    },
-    password: {
-      isRequired: {
-        message: "Пароль обязателен для заполнения",
-      },
-      isCapitalSymbol: {
-        message: "Пароль должен содержать хотя бы одну заглавную букву",
-      },
-      isDigitSymbol: {
-        message: "Пароль должен содержать хотя бы одну цифру",
-      },
-      passwordLength: {
-        message: `Пароль должен быть не менее 8 символов`,
-        value: 8,
-      },
-    },
-    profession: {
-      isRequired: {
-        message: "Поле профессия обязательно для заполнения",
-      },
-    },
-    licence: {
-      isRequired: {
-        message: "Необходимо подтвердить согласие с лицензионным соглашением",
-      },
-    },
-  };
+  const validateScheme = yup.object().shape({
+    email: yup
+      .string()
+      .required("Email is required")
+      .matches(/^\S+@\S+\.\S+$/, "Email is incorrect"),
+    password: yup
+      .string()
+      .required("Password is required")
+      .matches(/[A-Z]+/g, "Password contain uppercase character")
+      .matches(/\d+/g, "Password contain digit character")
+      .min(8, "Password must contains minimum 8 symbols"),
+  });
 
   useEffect(() => {
     if (submitTryes > 0) {
@@ -82,23 +44,21 @@ const RegistrationForm = () => {
   }, [data]);
 
   const validate = () => {
-    const errors = validator(data, validatorConfig);
-    setErrors(errors);
+    validateScheme
+      .validate(data)
+      .then(() => setErrors({}))
+      .catch((err) => setErrors({ [err.path]: err.message }));
     return Object.keys(errors).length === 0;
   };
 
   const isValid = Object.keys(errors).length === 0;
 
-  const handleSubmit = (e) => {
+  const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     setTryes(1);
     const isValid = validate();
     if (!isValid) return;
-    const newData = {
-      ...data,
-      qualities: data.qualities.map((q) => q.value),
-    };
-    dispatch(signUp(newData));
+    // dispatch(signUp(data));
   };
 
   return (
@@ -125,39 +85,13 @@ const RegistrationForm = () => {
         label="Name"
         error={errors.name}
       />
-      <SelectField
-        label="Профессия"
-        onChange={handleChange}
-        name="profession"
-        value={data.profession}
-        defaultOption="Выберите профессию"
-        options={professions}
-        error={errors.profession}
-      />
-      <RadioField
-        label="Пол"
-        name="sex"
-        value={data.sex}
-        onChange={handleChange}
-        options={[
-          { name: "male", value: "male" },
-          { name: "female", value: "female" },
-        ]}
-      />
-      <MultiSelectField
-        label="Ваши качества"
-        options={qualitiesList}
-        defaultValue={data.qualities}
-        onChange={handleChange}
-        name="qualities"
-      />
       <CheckBoxField
-        name="licence"
+        name="license"
         onChange={handleChange}
-        value={data.licence}
-        error={errors.licence}
+        value={data.license}
+        error={errors.license}
       >
-        Подтвердить <a>лицензионное соглашение</a>
+        I agree with <a>license agreement</a>
       </CheckBoxField>
 
       <button disabled={!isValid} className="btn btn-primary w-100 mx-auto">
