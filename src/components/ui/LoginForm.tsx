@@ -1,9 +1,9 @@
 import { useEffect, useState } from "react";
 import { TextField } from "../common/form/TextField";
-// import { useDispatch, useSelector } from "react-redux";
-// import { getAuthError, logIn } from "../../store/users";
 import * as yup from "yup";
 import { HandleChangeProps, IErrors } from "../../interfaces";
+import { useAppDispatch, useAppSelector } from "../../hooks/reduxHooks";
+import { getAuthError, logIn } from "../../store/users";
 
 const LoginForm = () => {
   const [data, setData] = useState({
@@ -13,8 +13,8 @@ const LoginForm = () => {
   });
   const [errors, setErrors] = useState({} as IErrors);
   const [submitTryes, setTryes] = useState(0);
-  // const dispatch = useDispatch();
-  // const enterError = useSelector(getAuthError());
+  const dispatch = useAppDispatch();
+  const enterError = useAppSelector(getAuthError());
 
   const handleChange = (inputData: HandleChangeProps) => {
     setData((prevState) => ({
@@ -52,7 +52,7 @@ const LoginForm = () => {
     setTryes(1);
     const isValid = validate();
     if (!isValid) return;
-    // dispatch(logIn(data));
+    dispatch(logIn(data));
   };
 
   return (
@@ -72,7 +72,7 @@ const LoginForm = () => {
         label="Password"
         error={errors.password}
       />
-      {/* {enterError && <p className="text-danger">{enterError}</p>} */}
+      {enterError && <p className="text-danger">{enterError}</p>}
       <button disabled={!isValid} className="btn btn-primary w-100 mx-auto">
         Submit
       </button>

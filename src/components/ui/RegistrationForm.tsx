@@ -2,12 +2,12 @@ import { useEffect, useState } from "react";
 import * as yup from "yup";
 import { TextField } from "../common/form/TextField";
 import { CheckBoxField } from "../common/form/CheckBox";
-// import { useDispatch, useSelector } from "react-redux";
-// import { signUp } from "../../store/users";
 import { HandleChangeProps, IErrors } from "../../interfaces";
+import { useAppDispatch } from "../../hooks/reduxHooks";
+import { signUp } from "../../store/users";
 
 const RegistrationForm = () => {
-  // const dispatch = useDispatch();
+  const dispatch = useAppDispatch();
   const [data, setData] = useState({
     email: "",
     password: "",
@@ -58,7 +58,7 @@ const RegistrationForm = () => {
     setTryes(1);
     const isValid = validate();
     if (!isValid) return;
-    // dispatch(signUp(data));
+    dispatch(signUp(data));
   };
 
   return (

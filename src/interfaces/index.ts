@@ -1,6 +1,6 @@
 export interface HandleChangeProps {
   name: string;
-  value: string | string[] | boolean;
+  value: string | string[] | boolean | number;
 }
 
 export interface IErrors {
@@ -36,7 +36,6 @@ export interface IUser {
   name: string;
   email: string;
   password: string;
-  bankAccounts?: string[];
 }
 
 export interface IAuth {
@@ -55,4 +54,38 @@ export interface IUserState {
 export interface ILoginPayload {
   email: string;
   password: string;
+}
+
+export interface IAppLoaderProps {
+  children: React.ReactNode;
+}
+
+export interface IMainCard {
+  headImg: string;
+  name: string;
+  link: string;
+  bgColor: string;
+  data: IBankAccount[];
+}
+
+export interface IBankAccount {
+  _id?: string;
+  title: string;
+  total: number;
+  userId: string;
+}
+
+export interface IMainPageCardItem {
+  data: IBankAccount;
+}
+
+export interface ITransaction {
+  _id?: string;
+  title: string;
+  total: number;
+  bankAccountId: string;
+  userId: string;
+  category: string;
+  isExpense: boolean;
+  Date: string;
 }
