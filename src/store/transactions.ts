@@ -2,6 +2,7 @@ import { createSlice } from "@reduxjs/toolkit";
 import { AppDispatch, RootState } from "./createStore";
 import transactionService from "../services/transaction.service";
 import { ITransaction } from "../interfaces";
+import { history } from "../utils/history";
 
 const transactionsSlice = createSlice({
   name: "transactions",
@@ -96,6 +97,7 @@ export const createTransaction =
         transaction
       );
       dispatch(transactionCreateSuccesed(content));
+      history.push("../../");
     } catch (error) {
       dispatch(transactionCreateRequestFailed(error.message));
     }

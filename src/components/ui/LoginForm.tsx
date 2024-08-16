@@ -31,12 +31,6 @@ const LoginForm = () => {
     password: yup.string().required("Password is required"),
   });
 
-  useEffect(() => {
-    if (submitTryes > 0) {
-      validate();
-    }
-  }, [data]);
-
   const validate = () => {
     validateScheme
       .validate(data)
@@ -45,9 +39,15 @@ const LoginForm = () => {
     return Object.keys(errors).length === 0;
   };
 
+  useEffect(() => {
+    if (submitTryes > 0) {
+      validate();
+    }
+  }, [data]);
+
   const isValid = Object.keys(errors).length === 0;
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setTryes(1);
     const isValid = validate();

@@ -99,7 +99,7 @@ export const signUp = (payload: IUser) => async (dispatch: AppDispatch) => {
     const data = await authService.registration(payload);
     localStorageService.setToken(data);
     dispatch(authRequestSuccess({ userId: data.userId }));
-    history.push("/user");
+    history.push("../");
   } catch (error) {
     const { code, message } = error.response.data.error;
     if (code === 400) {
@@ -118,7 +118,7 @@ export const logIn =
       const data = await authService.login({ email, password });
       localStorageService.setToken(data);
       dispatch(authRequestSuccess({ userId: data.userId }));
-      history.push("/user");
+      history.push("../");
     } catch (error) {
       const { code, message } = error.response.data.error;
       if (code === 400) {

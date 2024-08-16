@@ -8,6 +8,8 @@ import { IAppLoaderProps } from "../../../interfaces";
 import { useAppDispatch, useAppSelector } from "../../../hooks/reduxHooks";
 import { loadBankAccountsList } from "../../../store/bankAccounts";
 import localStorageService from "../../../services/localStorageService";
+import { loadTransactionsList } from "../../../store/transactions";
+import { loadCategoriesList } from "../../../store/categories";
 
 const AppLoader = ({ children }: IAppLoaderProps) => {
   const dispatch = useAppDispatch();
@@ -19,7 +21,9 @@ const AppLoader = ({ children }: IAppLoaderProps) => {
       //TODO add other data load
       dispatch(loadUser());
       if (currentUserId) {
+        dispatch(loadTransactionsList(currentUserId));
         dispatch(loadBankAccountsList(currentUserId));
+        dispatch(loadCategoriesList());
       }
     }
   }, [isLoggedIn]);

@@ -10,9 +10,25 @@ export interface IErrors {
 export interface ITextField {
   type: string;
   name: string;
-  value: string;
+  value: string | number;
   onChange: (props: HandleChangeProps) => void;
   label: string;
+  error: string;
+}
+
+export interface ICategories {
+  _id: string;
+  title: string;
+  color: string;
+}
+
+export interface ISelectField {
+  label: string;
+  onChange: (props: HandleChangeProps) => void;
+  name: string;
+  value: string;
+  defaultOption: string;
+  options: ICategories[] | IBankAccount[];
   error: string;
 }
 
@@ -86,6 +102,5 @@ export interface ITransaction {
   bankAccountId: string;
   userId: string;
   category: string;
-  isExpense: boolean;
-  Date: string;
+  date: string;
 }

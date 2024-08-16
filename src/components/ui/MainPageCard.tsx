@@ -14,12 +14,15 @@ const MainPageCard = ({ headImg, name, link, bgColor, data }: IMainCard) => {
           </Link>
         </div>
       </div>
-      <ul className="list-group list-group-flush">
+      <ul className="list-group list-group-flush tw-h-full">
         {data.length > 0 ? (
           data.map((item) => <MainPageCardItem key={item._id} data={item} />)
         ) : (
-          <li className="list-group-item">
-            You don't have any bank accounts added yet
+          <li className="list-group-item align-items-center tw-h-full">
+            <span className="text-align-center tw-h-full">
+              {" "}
+              You don't have any bank accounts added yet
+            </span>
           </li>
         )}
       </ul>

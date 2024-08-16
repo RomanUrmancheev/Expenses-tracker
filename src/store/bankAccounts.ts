@@ -2,6 +2,8 @@ import { createSlice } from "@reduxjs/toolkit";
 import bankAccountService from "../services/bankAccountService";
 import { AppDispatch, RootState } from "./createStore";
 import { IBankAccount } from "../interfaces";
+import { history } from "../utils/history";
+import { toast } from "react-toastify";
 
 const bankAccountsSlice = createSlice({
   name: "bankAccounts",
@@ -96,6 +98,7 @@ export const createBankAccount =
         bankAccount
       );
       dispatch(bankAccountCreateSuccesed(content));
+      history.push("../");
     } catch (error) {
       dispatch(bankAccountCreateRequestFailed(error.message));
     }
@@ -120,6 +123,7 @@ export const bankAccountUpdate =
     try {
       const { content } = await bankAccountService.updateBankAccount(data);
       dispatch(updateRequestSuccess(content));
+      toast.success("Bank account updated");
     } catch (error) {
       dispatch(updateRequestFailed(error.message));
     }
