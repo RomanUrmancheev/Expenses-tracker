@@ -39,9 +39,10 @@ const MainPage = () => {
         <MainPageCard
           headImg={bankAccountImg}
           name="Bank Accounts"
-          link="./bank-accounts-add"
+          link="./bankAccounts/add"
           bgColor={bankAccountCardBg}
           data={bankAccounts}
+          listLink="./bankAccounts"
         />
         <MainPageCard
           headImg={incomeImg}
@@ -49,6 +50,7 @@ const MainPage = () => {
           link="./transactions-add"
           bgColor={incomeCardBg}
           data={incomes}
+          listLink="./transactions"
         />
         <MainPageCard
           headImg={expensesImg}
@@ -56,6 +58,7 @@ const MainPage = () => {
           link="./transactions-add"
           bgColor={expensesCardBg}
           data={expenses}
+          listLink="./transactions"
         />
       </div>
       <div className="row">

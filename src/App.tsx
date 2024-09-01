@@ -11,6 +11,7 @@ import "moment/locale/de";
 import { LocalizationProvider } from "@mui/x-date-pickers";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import BankAccounts from "./layouts/BankAccounts";
 
 function App() {
   return (
@@ -19,6 +20,10 @@ function App() {
         <AppLoader>
           <Navigation />
           <Switch>
+            <Route
+              path="/bankAccounts/:action?/:bankId?"
+              component={BankAccounts}
+            />
             <Route path="/bank-accounts-add" component={CreateBankAccount} />
             <Route path="/transactions-add" component={CreateTransaction} />
             <Route path="/login/:type?" component={Login} />

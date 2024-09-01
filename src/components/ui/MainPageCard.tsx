@@ -2,7 +2,14 @@ import { Link } from "react-router-dom";
 import { IMainCard } from "../../interfaces";
 import MainPageCardItem from "./MainPageCardItem";
 
-const MainPageCard = ({ headImg, name, link, bgColor, data }: IMainCard) => {
+const MainPageCard = ({
+  headImg,
+  name,
+  link,
+  bgColor,
+  data,
+  listLink,
+}: IMainCard) => {
   return (
     <div className="col card p-0 mb-4 me-4">
       <div className={bgColor}>
@@ -27,9 +34,11 @@ const MainPageCard = ({ headImg, name, link, bgColor, data }: IMainCard) => {
         )}
       </ul>
       <div className={bgColor}>
-        <button type="button" className="btn text-white fs-3">
-          See all
-        </button>
+        <Link to={listLink}>
+          <button type="button" className="btn text-white fs-3">
+            See all
+          </button>
+        </Link>
       </div>
     </div>
   );

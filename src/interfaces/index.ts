@@ -80,19 +80,26 @@ export interface IMainCard {
   headImg: string;
   name: string;
   link: string;
+  listLink: string;
   bgColor: string;
-  data: IBankAccount[];
+  data: ITransaction[] | IBankAccount[];
 }
 
 export interface IBankAccount {
-  _id?: string;
+  _id: string;
+  title: string;
+  total: number;
+  userId: string;
+}
+
+export interface IBankAccountCreate {
   title: string;
   total: number;
   userId: string;
 }
 
 export interface IMainPageCardItem {
-  data: IBankAccount;
+  data: ITransaction | IBankAccount;
 }
 
 export interface ITransaction {
@@ -103,4 +110,8 @@ export interface ITransaction {
   userId: string;
   category: string;
   date: string;
+}
+
+export interface RouteParams {
+  [key: string]: string;
 }

@@ -1,10 +1,10 @@
-import { IBankAccount } from "../interfaces";
+import { IBankAccount, IBankAccountCreate } from "../interfaces";
 import httpService from "./http.service";
 
 const bankAccountEndpoint = "bankAccount/";
 
 const bankAccountService = {
-  createBankAccount: async (payload: IBankAccount) => {
+  createBankAccount: async (payload: IBankAccountCreate) => {
     const { data } = await httpService.post(bankAccountEndpoint, payload);
     return data;
   },

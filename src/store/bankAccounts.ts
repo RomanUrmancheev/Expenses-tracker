@@ -1,7 +1,7 @@
 import { createSlice } from "@reduxjs/toolkit";
 import bankAccountService from "../services/bankAccountService";
 import { AppDispatch, RootState } from "./createStore";
-import { IBankAccount } from "../interfaces";
+import { IBankAccount, IBankAccountCreate } from "../interfaces";
 import { history } from "../utils/history";
 import { toast } from "react-toastify";
 
@@ -91,7 +91,7 @@ export const loadBankAccountsList =
     }
   };
 export const createBankAccount =
-  (bankAccount: IBankAccount) => async (dispatch: AppDispatch) => {
+  (bankAccount: IBankAccountCreate) => async (dispatch: AppDispatch) => {
     dispatch(bankAccountCreateRequested());
     try {
       const { content } = await bankAccountService.createBankAccount(
@@ -131,6 +131,12 @@ export const bankAccountUpdate =
 
 export const getBankAccounts = () => (state: RootState) =>
   state.bankAccounts.entities;
+export const getBankAccountById =
+  (bankAccountId: string) => (state: RootState) => {
+    if (state.bankAccounts.entities) {
+      return state.bankAccounts.entities.find((b) => b._id === bankAccountId);
+    }
+  };
 export const getBankAccountsLoadingStatus = () => (state: RootState) =>
   state.bankAccounts.isLoading;
 
