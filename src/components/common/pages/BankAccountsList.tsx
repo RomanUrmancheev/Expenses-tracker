@@ -9,6 +9,8 @@ import AccountsTableBody from "../table/BankAccounts/AccountsTableBody";
 import { useEffect, useState } from "react";
 import { IBankAccount } from "../../../interfaces";
 
+//TODO improve table view
+
 const BankAccountsList = () => {
   const dispatch = useAppDispatch();
   const history = useHistory();

@@ -1,10 +1,10 @@
-import { ITransaction } from "../interfaces";
+import { ITransaction, ITransactionCreate } from "../interfaces";
 import httpService from "./http.service";
 
 const transactionEndpoint = "transaction/";
 
 const transactionService = {
-  createTransaction: async (payload: ITransaction) => {
+  createTransaction: async (payload: ITransactionCreate) => {
     const { data } = await httpService.post(transactionEndpoint, payload);
     return data;
   },

@@ -1,7 +1,8 @@
+import { bankAccountUpdate } from "./bankAccounts";
 import { createSlice } from "@reduxjs/toolkit";
 import { AppDispatch, RootState } from "./createStore";
 import transactionService from "../services/transaction.service";
-import { ITransaction } from "../interfaces";
+import { IBankAccount, ITransaction, ITransactionCreate } from "../interfaces";
 import { history } from "../utils/history";
 
 const transactionsSlice = createSlice({
@@ -90,7 +91,7 @@ export const loadTransactionsList =
     }
   };
 export const createTransaction =
-  (transaction: ITransaction) => async (dispatch: AppDispatch) => {
+  (transaction: ITransactionCreate) => async (dispatch: AppDispatch) => {
     dispatch(transactionCreateRequested());
     try {
       const { content } = await transactionService.createTransaction(
@@ -117,11 +118,15 @@ export const deleteTransaction =
   };
 
 export const transactionUpdate =
-  (data: ITransaction) => async (dispatch: AppDispatch) => {
+  (data: ITransaction, updatedAccount: IBankAccount | null = null) =>
+  async (dispatch: AppDispatch) => {
     dispatch(updateRequested());
     try {
       const { content } = await transactionService.updateTransaction(data);
       dispatch(updateRequestSuccess(content));
+      if (updatedAccount !== null) {
+        dispatch(bankAccountUpdate(updatedAccount));
+      }
     } catch (error) {
       dispatch(updateRequestFailed(error.message));
     }
@@ -131,5 +136,11 @@ export const getTransactions = () => (state: RootState) =>
   state.transactions.entities;
 export const getTransactionsLoadingStatus = () => (state: RootState) =>
   state.transactions.isLoading;
+export const getTransactionById =
+  (transactionId: string) => (state: RootState) => {
+    if (state.transactions.entities) {
+      return state.transactions.entities.find((t) => t._id === transactionId);
+    }
+  };
 
 export default transactionsReducer;

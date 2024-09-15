@@ -98,12 +98,8 @@ export interface IBankAccountCreate {
   userId: string;
 }
 
-export interface IMainPageCardItem {
-  data: ITransaction | IBankAccount;
-}
-
 export interface ITransaction {
-  _id?: string;
+  _id: string;
   title: string;
   total: number;
   bankAccountId: string;
@@ -112,6 +108,48 @@ export interface ITransaction {
   date: string;
 }
 
+export interface ITransactionCreate {
+  title: string;
+  total: number;
+  bankAccountId: string;
+  userId: string;
+  category: string;
+  date: string;
+}
+
+export interface IMainPageCardItem {
+  data: ITransaction | IBankAccount;
+}
+
 export interface RouteParams {
   [key: string]: string;
+}
+
+export interface IColumns {
+  title: {
+    path: "title";
+    name: "Title";
+  };
+  category: {
+    name: "Transaction category";
+    component: (transaction: ITransaction) => React.ReactNode;
+  };
+  bankAccount: {
+    component: (transaction: ITransaction) => React.ReactNode;
+    name: "Bank account of transaction";
+  };
+  transactionAmount: {
+    path: "transactionAmount";
+    name: "Transaction amount";
+  };
+  editTransaction: {
+    path: "editTransaction";
+    name: "";
+    component: (transaction: ITransaction) => React.ReactNode;
+  };
+  deleteTransaction: {
+    path: "deleteTransaction";
+    name: "";
+    component: (transaction: ITransaction) => React.ReactNode;
+  };
 }

@@ -1,7 +1,7 @@
-import { IBankAccount, ITransaction } from "../interfaces";
+import { IBankAccount, ITransaction, ITransactionCreate } from "../interfaces";
 
-const updateAccountTotal = (
-  transaction: ITransaction,
+export const updateAccountTotal = (
+  transaction: ITransactionCreate,
   bankAccounts: IBankAccount[]
 ) => {
   const accountForUpdate = bankAccounts.find(
@@ -15,4 +15,29 @@ const updateAccountTotal = (
   }
 };
 
-export default updateAccountTotal;
+export const updateAccountTotalAfterTransactionEdit = (
+  oldTransaction: ITransaction,
+  newTransaction: ITransaction,
+  bankAccounts: IBankAccount[]
+) => {
+  const bankAccount = bankAccounts.find(
+    (b) => b._id === newTransaction.bankAccountId
+  );
+  if (oldTransaction.total < 0) {
+    return {
+      ...bankAccount,
+      total:
+        bankAccount!.total +
+        oldTransaction.total * -1 +
+        newTransaction.total.toFixed(2),
+    };
+  } else {
+    return {
+      ...bankAccount,
+      total:
+        bankAccount!.total -
+        oldTransaction.total +
+        newTransaction.total.toFixed(2),
+    };
+  }
+};

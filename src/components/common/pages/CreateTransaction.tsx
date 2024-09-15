@@ -12,7 +12,7 @@ import {
   bankAccountUpdate,
   getBankAccounts,
 } from "../../../store/bankAccounts";
-import updateAccountTotal from "../../../utils/updateAccountTotal";
+import { updateAccountTotal } from "../../../utils/updateAccountTotal";
 import { createTransaction } from "../../../store/transactions";
 
 const CreateTransaction = () => {
@@ -74,8 +74,6 @@ const CreateTransaction = () => {
         date: transactionDate.format("DD.MM.YYYY"),
       };
       const updatedAccount = updateAccountTotal(formatedData, bankAccounts);
-      console.log(formatedData);
-      console.log("account", updatedAccount);
       dispatch(createTransaction(formatedData));
       updatedAccount ? dispatch(bankAccountUpdate(updatedAccount)) : null;
     }
