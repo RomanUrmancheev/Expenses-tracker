@@ -126,30 +126,7 @@ export interface RouteParams {
 }
 
 export interface IColumns {
-  title: {
-    path: "title";
-    name: "Title";
-  };
-  category: {
-    name: "Transaction category";
-    component: (transaction: ITransaction) => React.ReactNode;
-  };
-  bankAccount: {
-    component: (transaction: ITransaction) => React.ReactNode;
-    name: "Bank account of transaction";
-  };
-  transactionAmount: {
-    path: "transactionAmount";
-    name: "Transaction amount";
-  };
-  editTransaction: {
-    path: "editTransaction";
-    name: "";
-    component: (transaction: ITransaction) => React.ReactNode;
-  };
-  deleteTransaction: {
-    path: "deleteTransaction";
-    name: "";
-    component: (transaction: ITransaction) => React.ReactNode;
-  };
+  path?: string;
+  name: string;
+  component?: (transaction: ITransaction) => React.ReactNode;
 }

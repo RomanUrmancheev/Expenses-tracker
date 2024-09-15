@@ -9,7 +9,7 @@ interface ISortBy {
 interface TableHeaderProps {
   onSort: (item: ISortBy) => void;
   selectedSort: ISortBy;
-  columns: IColumns;
+  columns: IColumns[];
 }
 
 const TableHeader = ({ onSort, selectedSort, columns }: TableHeaderProps) => {
@@ -38,15 +38,15 @@ const TableHeader = ({ onSort, selectedSort, columns }: TableHeaderProps) => {
   return (
     <thead>
       <tr>
-        {Object.keys(columns).map((column) => (
+        {columns.map((column) => (
           <th
-            key={column}
-            onClick={() => handleSort(columns[column].path)}
-            role={columns[column].path ? "button" : undefined}
+            key={column.name}
+            onClick={column?.path ? () => handleSort(column.path) : undefined}
+            role={column.path ? "button" : undefined}
             scope="col"
           >
-            {columns[column].name}{" "}
-            {renderSortArrow(selectedSort, columns[column].path)}
+            {column.name}
+            {column.path ? renderSortArrow(selectedSort, column.path) : null}
           </th>
         ))}
       </tr>

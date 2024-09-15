@@ -1,4 +1,5 @@
 import { IColumns, ITransaction } from "../../../../interfaces";
+import TableHeader from "./TableHeader";
 
 interface ISortBy {
   item: string;
@@ -10,7 +11,7 @@ interface TableProps {
   data: ITransaction[];
   onSort: (item: ISortBy) => void;
   selectedSort: ISortBy;
-  columns: IColumns;
+  columns: IColumns[];
 }
 const Table = ({ onSort, selectedSort, columns, data }: TableProps) => {
   return (
