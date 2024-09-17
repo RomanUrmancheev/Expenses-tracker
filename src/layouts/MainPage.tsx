@@ -47,7 +47,7 @@ const MainPage = () => {
         <MainPageCard
           headImg={incomeImg}
           name="Income"
-          link="./transactions-add"
+          link="./transactions/add"
           bgColor={incomeCardBg}
           data={incomes}
           listLink="./transactions"
@@ -55,7 +55,7 @@ const MainPage = () => {
         <MainPageCard
           headImg={expensesImg}
           name="Expenses"
-          link="./transactions-add"
+          link="./transactions/add"
           bgColor={expensesCardBg}
           data={expenses}
           listLink="./transactions"

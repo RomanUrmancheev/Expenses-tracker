@@ -1,4 +1,5 @@
 import { IColumns, ITransaction } from "../../../../interfaces";
+import TableBody from "./TableBody";
 import TableHeader from "./TableHeader";
 
 interface ISortBy {
@@ -6,6 +7,8 @@ interface ISortBy {
   path: string;
   order: boolean | "asc" | "desc";
 }
+
+//TODO change table position
 
 interface TableProps {
   data: ITransaction[];

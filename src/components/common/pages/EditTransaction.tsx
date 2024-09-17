@@ -1,6 +1,11 @@
 import { useHistory, useParams } from "react-router";
 import { useAppDispatch, useAppSelector } from "../../../hooks/reduxHooks";
-import { HandleChangeProps, IErrors, RouteParams } from "../../../interfaces";
+import {
+  HandleChangeProps,
+  IBankAccount,
+  IErrors,
+  RouteParams,
+} from "../../../interfaces";
 import {
   getTransactionById,
   transactionUpdate,
@@ -39,6 +44,7 @@ const EditTransaction = () => {
   useEffect(() => {
     if (currentTransaction && data._id === "") {
       setData(currentTransaction);
+      setTransactionDate(moment(currentTransaction.date, "DD.MM.YYYY"));
     }
   }, [data, currentTransaction]);
 
@@ -98,8 +104,13 @@ const EditTransaction = () => {
         formatedData,
         bankAccounts
       );
-      updatedAccount ??
-        dispatch(transactionUpdate(formatedData, updatedAccount));
+      console.log(updatedAccount);
+      if (updatedAccount !== undefined) {
+        dispatch(
+          transactionUpdate(formatedData, updatedAccount as IBankAccount)
+        );
+      }
+
       history.goBack();
     } else {
       dispatch(transactionUpdate(formatedData));

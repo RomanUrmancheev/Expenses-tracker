@@ -8,6 +8,8 @@ import AccountsHeader from "../table/BankAccounts/AccountsHeader";
 import AccountsTableBody from "../table/BankAccounts/AccountsTableBody";
 import { useEffect, useState } from "react";
 import { IBankAccount } from "../../../interfaces";
+import BackHistoryButton from "../BackButton";
+import CreateNewButton from "../CreateNewButton";
 
 //TODO improve table view
 
@@ -32,14 +34,23 @@ const BankAccountsList = () => {
   };
 
   return (
-    <table className="table">
-      <AccountsHeader />
-      <AccountsTableBody
-        data={bankAccounts}
-        onEdit={handleEdit}
-        onDelete={handleDelete}
-      />
-    </table>
+    <div className="container mt-4">
+      <div className="mb-4 d-flex justify-content-between">
+        <BackHistoryButton />
+        <CreateNewButton
+          label={"Add new bank account"}
+          link={"bankAccounts/add"}
+        />
+      </div>
+      <table className="table">
+        <AccountsHeader />
+        <AccountsTableBody
+          data={bankAccounts}
+          onEdit={handleEdit}
+          onDelete={handleDelete}
+        />
+      </table>
+    </div>
   );
 };
 

@@ -33,7 +33,7 @@ const Navigation = () => {
               <li>
                 <Link
                   className="nav-link fs-5 text-white tw-text-lg"
-                  to="../../history"
+                  to="../../transactions"
                 >
                   History
                 </Link>

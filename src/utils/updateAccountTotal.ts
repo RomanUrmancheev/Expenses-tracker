@@ -24,20 +24,23 @@ export const updateAccountTotalAfterTransactionEdit = (
     (b) => b._id === newTransaction.bankAccountId
   );
   if (oldTransaction.total < 0) {
+    const newTotal =
+      bankAccount!.total +
+      oldTransaction.total * -1 +
+      Number(newTransaction.total.toFixed(2));
     return {
       ...bankAccount,
-      total:
-        bankAccount!.total +
-        oldTransaction.total * -1 +
-        newTransaction.total.toFixed(2),
+      total: newTotal,
     };
   } else {
+    const newTotal = Number(
+      bankAccount!.total -
+        oldTransaction.total +
+        Number(newTransaction.total.toFixed(2))
+    );
     return {
       ...bankAccount,
-      total:
-        bankAccount!.total -
-        oldTransaction.total +
-        newTransaction.total.toFixed(2),
+      total: newTotal,
     };
   }
 };

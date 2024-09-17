@@ -33,13 +33,13 @@ const MainPageCard = ({
           </li>
         )}
       </ul>
-      <div className={bgColor}>
-        <Link to={listLink}>
+      <Link to={listLink}>
+        <div className={bgColor}>
           <button type="button" className="btn text-white fs-3">
             See all
           </button>
-        </Link>
-      </div>
+        </div>
+      </Link>
     </div>
   );
 };

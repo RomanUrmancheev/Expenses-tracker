@@ -1,5 +1,5 @@
 import { IBankAccount } from "../../../../interfaces";
-import getAmountClass from "../../../../utils/getAmountClass";
+import TotalAmount from "../../../ui/TotalAmount";
 
 interface tableProps {
   data: IBankAccount[];
@@ -14,7 +14,7 @@ const AccountsTableBody = ({ data, onEdit, onDelete }: tableProps) => {
         <tr key={i._id}>
           <td key={i.title}>{i.title}</td>
           <td key={i.total}>
-            <div className={getAmountClass(i.total)}>{i.total}</div>
+            <TotalAmount transaction={i} />
           </td>
           <td key={`edit${i._id}`}>
             <button

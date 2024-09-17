@@ -4,6 +4,7 @@ import BankAccount from "./BankAccount";
 import Category from "./Category";
 import DeleteTransactionButton from "./DeleteTransactionButton";
 import EditTransactionButton from "./EditTransactionButton";
+import TotalAmount from "./TotalAmount";
 
 interface ITransactionsTableProps {
   transactions: ITransaction[];
@@ -28,12 +29,15 @@ const TransactionsTable = ({
 }: ITransactionsTableProps) => {
   const columns = [
     {
+      path: "date",
+      name: "Transaction date",
+    },
+    {
       path: "title",
       name: "Title",
     },
     {
       name: "Transaction category",
-      path: "transactionCategory",
       component: (transaction: ITransaction) => (
         <Category categoryId={transaction.category} />
       ),
@@ -45,17 +49,20 @@ const TransactionsTable = ({
       name: "Bank account of transaction",
     },
     {
-      path: "transactionAmount",
+      path: "total",
       name: "Transaction amount",
+      component: (transaction: ITransaction) => (
+        <TotalAmount transaction={transaction} />
+      ),
     },
     {
-      name: "",
+      name: " ",
       component: (transaction: ITransaction) => (
         <EditTransactionButton id={transaction._id} onEdit={onEdit} />
       ),
     },
     {
-      name: "",
+      name: "  ",
       component: (transaction: ITransaction) => (
         <DeleteTransactionButton id={transaction._id} onDelete={onDelete} />
       ),
