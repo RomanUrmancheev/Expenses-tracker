@@ -134,6 +134,8 @@ export const transactionUpdate =
 
 export const getTransactions = () => (state: RootState) =>
   state.transactions.entities;
+export const getExpenses = () => (state: RootState) =>
+  state.transactions.entities.filter((item) => item.total < 0);
 export const getTransactionsLoadingStatus = () => (state: RootState) =>
   state.transactions.isLoading;
 export const getTransactionById =

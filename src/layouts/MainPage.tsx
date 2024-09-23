@@ -12,6 +12,7 @@ import {
   getTransactions,
   getTransactionsLoadingStatus,
 } from "../store/transactions";
+import AnalyticTabs from "../components/ui/AnalyticTabs";
 
 const bankAccountCardBg = "tw-bg-gradient-to-r tw-from-teal-400 tw-to-cyan-500";
 const incomeCardBg = "tw-bg-gradient-to-r tw-from-cyan-500 tw-to-sky-500";
@@ -35,7 +36,7 @@ const MainPage = () => {
 
   return !isLoading ? (
     <div className="container text-center mt-5">
-      <div className="row">
+      <div className="row mb-3">
         <MainPageCard
           headImg={bankAccountImg}
           name="Bank Accounts"
@@ -62,9 +63,8 @@ const MainPage = () => {
         />
       </div>
       <div className="row">
-        <div className="col">
-          <h1>Analytics</h1>
-        </div>
+        <h1>Analytics</h1>
+        <AnalyticTabs />
       </div>
     </div>
   ) : (

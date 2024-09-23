@@ -11,6 +11,7 @@ import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import BankAccounts from "./layouts/BankAccounts";
 import Transactions from "./layouts/Transactions";
+import Analytics from "./layouts/Analytics";
 
 function App() {
   return (
@@ -27,6 +28,7 @@ function App() {
               path="/transactions/:action?/:transactionId?"
               component={Transactions}
             />
+            <Route path="/analytics/:type?" component={Analytics} />
             <Route path="/login/:type?" component={Login} />
             <Route path="/" exact component={Main} />
             <Redirect to="/" />

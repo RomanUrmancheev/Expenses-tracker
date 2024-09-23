@@ -136,7 +136,7 @@ const TransactionHistory = () => {
           )}
           <div className="d-flex flex-column">
             <div className="d-flex align-items-center tw-justify-between mb-3">
-              <div>
+              <div className="d-flex align-items-center tw-mr-5">
                 <DatePicker
                   format="DD.MM.YYYY"
                   label="Transaction range start"
@@ -148,6 +148,7 @@ const TransactionHistory = () => {
                       start: newValue,
                     }))
                   }
+                  slotProps={{ textField: { size: "small" } }}
                 />
                 <span className="mx-3 display-6"> - </span>
                 <DatePicker
@@ -161,11 +162,12 @@ const TransactionHistory = () => {
                       end: newValue,
                     }))
                   }
+                  slotProps={{ textField: { size: "small" } }}
                 />
               </div>
               <CreateNewButton
                 label="Add new transaction"
-                link="bankAccounts/add"
+                link="transactions/add"
               />
             </div>
 
