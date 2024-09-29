@@ -9,7 +9,7 @@ import {
   deleteTransaction,
   getTransactions,
 } from "../../../store/transactions";
-import _ from "lodash";
+// import _ from "lodash";
 import { paginate } from "../../../utils/paginate";
 import Pagination from "../Pagination";
 import TransactionsTable from "../../ui/TransactionsTable";
@@ -19,6 +19,7 @@ import SearchForm from "../form/SearchForm";
 import moment from "moment";
 import { DatePicker } from "@mui/x-date-pickers";
 import CreateNewButton from "../CreateNewButton";
+import { getSortByDate } from "../../../utils/getSortByDate";
 
 interface ISortBy {
   item: string;
@@ -88,10 +89,10 @@ const TransactionHistory = () => {
     const filteredTransactions = filterTransactions(transactions);
 
     const count = filteredTransactions.length;
-    const sortedTransactions = _.orderBy(
+    const sortedTransactions = getSortByDate(
       filteredTransactions,
-      [sortBy.path],
-      [sortBy.order]
+      sortBy.path,
+      sortBy.order
     );
 
     const handleEdit = (transactionId: string) => {

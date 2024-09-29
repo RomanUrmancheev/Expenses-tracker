@@ -34,11 +34,22 @@ const AnalyticTabs = () => {
           />
           <TabPaneContent
             svg={barChart}
-            label="Expenses by month's"
+            label="Expenses by month"
             url="/analytics/bars-chart"
           />
         </AnalyticsTabPane>
-        {/* <AnalyticsTabPane name="Income" status={status}> */}
+        <AnalyticsTabPane name="Income" status={status}>
+          <TabPaneContent
+            svg={barChart}
+            label="Incomes/Expenses comparison"
+            url="/analytics/comparison"
+          />
+          <TabPaneContent
+            svg={barChart}
+            label="Incomes by month"
+            url="/analytics/income-bars-chart"
+          />
+        </AnalyticsTabPane>
       </div>
     </>
   );
