@@ -17,7 +17,7 @@ const columns = ["Title", "Date", "Category", "Total amount"];
 const BarsChartPage = () => {
   const transactions = useAppSelector(getTransactions());
   const expensesList = transactions.filter((i) => i.total < 0);
-  const [chartRange, setChartRange] = useState(12);
+  const [chartRange, setChartRange] = useState(3);
   const [chartData, setChartData] = useState<ChartDataType>();
   const [tableData, setTableData] = useState<ITransaction[] | null>(null);
 
@@ -36,8 +36,7 @@ const BarsChartPage = () => {
     _event: React.MouseEvent<SVGElement, MouseEvent>,
     bar: BarItemIdentifier
   ) => {
-    if (chartData !== undefined)
-      setTableData(chartData?.tableData[bar.dataIndex]);
+    if (chartData) setTableData(chartData.tableData[bar.dataIndex]);
   };
 
   return chartData ? (
@@ -83,7 +82,11 @@ const BarsChartPage = () => {
         />
       </div>
       {tableData !== null ? (
-        <ChartTable columns={columns} transactions={tableData} />
+        <ChartTable
+          columns={columns}
+          transactions={tableData}
+          isChartTable={true}
+        />
       ) : null}
     </div>
   ) : (

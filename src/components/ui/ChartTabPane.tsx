@@ -1,12 +1,20 @@
 import { useState } from "react";
 import AnalyticsNav from "./AnalyticsNav";
 import AnalyticsTabPane from "./AnalyticsTabPane";
-import donutChart from "../../assets/donutChart.svg";
-import barChart from "../../assets/bar_chart.svg";
-import TabPaneContent from "../common/TabPaneContent";
-import compareChart from "../../assets/compareChart.svg";
+import ChartTable from "../common/table/ChartTable/ChartTable";
+import { ITransaction } from "../../interfaces";
 
-const AnalyticTabs = () => {
+type TransactionsType = {
+  expenses: ITransaction[];
+  incomes: ITransaction[];
+};
+
+interface IChartTabProps {
+  columns: string[];
+  transactions: TransactionsType;
+}
+
+const ChartTabPane = ({ columns, transactions }: IChartTabProps) => {
   const [status, setStatus] = useState("Expenses");
 
   const toggleStatus = (e: React.MouseEvent<HTMLButtonElement>) => {
@@ -15,7 +23,7 @@ const AnalyticTabs = () => {
   };
 
   return (
-    <>
+    <div className="container w-50 mt-3">
       <nav>
         <div className="nav nav-tabs" id="nav-tab" role="tablist">
           <AnalyticsNav
@@ -28,32 +36,22 @@ const AnalyticTabs = () => {
       </nav>
       <div className="tab-content" id="nav-tabContent">
         <AnalyticsTabPane name="Expenses" status={status}>
-          <TabPaneContent
-            svg={donutChart}
-            label="Expenses by categories"
-            url="/analytics/donut"
-          />
-          <TabPaneContent
-            svg={barChart}
-            label="Expenses by month"
-            url="/analytics/bars-chart"
+          <ChartTable
+            columns={columns}
+            transactions={transactions.expenses}
+            isChartTable={false}
           />
         </AnalyticsTabPane>
         <AnalyticsTabPane name="Income" status={status}>
-          <TabPaneContent
-            svg={compareChart}
-            label="Incomes/Expenses comparison"
-            url="/analytics/comparison"
-          />
-          <TabPaneContent
-            svg={barChart}
-            label="Incomes by month"
-            url="/analytics/income-bars-chart"
+          <ChartTable
+            columns={columns}
+            transactions={transactions.incomes}
+            isChartTable={false}
           />
         </AnalyticsTabPane>
       </div>
-    </>
+    </div>
   );
 };
 
-export default AnalyticTabs;
+export default ChartTabPane;

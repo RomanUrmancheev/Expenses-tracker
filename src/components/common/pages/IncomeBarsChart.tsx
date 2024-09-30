@@ -17,7 +17,7 @@ const columns = ["Title", "Date", "Category", "Total amount"];
 const IncomeBarsChartPage = () => {
   const transactions = useAppSelector(getTransactions());
   const incomesList = transactions.filter((i) => i.total > 0);
-  const [chartRange, setChartRange] = useState(12);
+  const [chartRange, setChartRange] = useState(3);
   const [chartData, setChartData] = useState<ChartDataType>();
   const [tableData, setTableData] = useState<ITransaction[] | null>(null);
 
@@ -83,7 +83,11 @@ const IncomeBarsChartPage = () => {
         />
       </div>
       {tableData !== null ? (
-        <ChartTable columns={columns} transactions={tableData} />
+        <ChartTable
+          columns={columns}
+          transactions={tableData}
+          isChartTable={true}
+        />
       ) : null}
     </div>
   ) : (

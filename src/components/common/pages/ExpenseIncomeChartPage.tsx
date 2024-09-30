@@ -4,17 +4,21 @@ import { getTransactions } from "../../../store/transactions";
 import { getDataForExpenseIncomeChart } from "../../../utils/chartsHelper";
 import { BarChart, BarItemIdentifier } from "@mui/x-charts";
 import { ITransaction } from "../../../interfaces";
-import ChartTable from "../table/ChartTable/ChartTable";
+import ChartTabPane from "../../ui/ChartTabPane";
 
 interface ITableData {
   incomes: ITransaction[];
   expenses: ITransaction[];
 }
 
+interface IDataSet {
+  expenses: number;
+  incomes: number;
+}
+
 type ChartDataType = {
   xAxis: string[];
-  expenses: number[];
-  incomes: number[];
+  dataset: IDataSet[];
   tableData: ITableData[];
 };
 
@@ -24,9 +28,9 @@ export const ExpensesIncomeChartPage = () => {
   const transactions = useAppSelector(getTransactions());
   const incomesList = transactions.filter((i) => i.total > 0);
   const expensesList = transactions.filter((i) => i.total < 0);
-  const [chartRange, setChartRange] = useState(12);
+  const [chartRange, setChartRange] = useState(3);
   const [chartData, setChartData] = useState<ChartDataType>();
-  const [tableData, setTableData] = useState<ITransaction[] | null>(null);
+  const [tableData, setTableData] = useState<ITableData | null>(null);
 
   useEffect(() => {
     if (incomesList !== undefined && expensesList !== undefined) {
@@ -35,9 +39,7 @@ export const ExpensesIncomeChartPage = () => {
         incomesList,
         chartRange
       );
-      console.log(data);
       setChartData(data);
-      console.log(chartData);
     }
   }, [chartRange, transactions]);
 
@@ -50,10 +52,12 @@ export const ExpensesIncomeChartPage = () => {
     _event: React.MouseEvent<SVGElement, MouseEvent>,
     bar: BarItemIdentifier
   ) => {
-    console.log(bar);
-    // if (chartData !== undefined)
-    //   setTableData(chartData?.tableData[bar.dataIndex]);
+    if (chartData) setTableData(chartData.tableData[bar.dataIndex]);
   };
+
+  function valueFormatter(value: number | null) {
+    return `${value}$`;
+  }
 
   return chartData ? (
     <div className="d-flex flex-column mt-5">
@@ -79,6 +83,7 @@ export const ExpensesIncomeChartPage = () => {
       </div>
       <div className="d-flex justify-content-center">
         <BarChart
+          dataset={chartData.dataset}
           xAxis={[
             {
               id: "barCategories",
@@ -88,14 +93,16 @@ export const ExpensesIncomeChartPage = () => {
           ]}
           series={[
             {
-              dataKey: "Expenses",
-              data: chartData.expenses,
-              label: "Expenses by month",
+              dataKey: "incomes",
+              label: "Incomes by month",
+              valueFormatter,
+              color: "#2dd4bf",
             },
             {
-              dataKey: "Incomes",
-              data: chartData.incomes,
-              label: "Incomes by month",
+              dataKey: "expenses",
+              label: "Expenses by month",
+              valueFormatter,
+              color: "#f15a61",
             },
           ]}
           width={700}
@@ -103,8 +110,8 @@ export const ExpensesIncomeChartPage = () => {
           onItemClick={handleBarsCLick}
         />
       </div>
-      {tableData !== null ? (
-        <ChartTable columns={columns} transactions={tableData} />
+      {tableData ? (
+        <ChartTabPane columns={columns} transactions={tableData} />
       ) : null}
     </div>
   ) : (

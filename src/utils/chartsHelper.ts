@@ -119,8 +119,7 @@ export const getDataForExpenseIncomeChart = (
   range: number
 ) => {
   const dateArr = [];
-  const totalExp = [];
-  const totalInc = [];
+  const dataset = [];
   const tableData = [];
   for (let i = 0; i < range; i++) {
     dateArr.unshift(moment().subtract(i, "months").format("MMMM").slice(0, 3));
@@ -136,18 +135,15 @@ export const getDataForExpenseIncomeChart = (
         moment().subtract(i, "months").endOf("month")
       )
     );
-    totalExp.unshift(
-      expensesForPeriod.reduce(
-        (sum, current: ITransaction) => sum + current.total * -1,
-        0
-      )
+    const totalExp = expensesForPeriod.reduce(
+      (sum, current: ITransaction) => sum + current.total * -1,
+      0
     );
-    totalInc.unshift(
-      incomesForPeriod.reduce(
-        (sum, current: ITransaction) => sum + current.total * -1,
-        0
-      )
+    const totalInc = incomesForPeriod.reduce(
+      (sum, current: ITransaction) => sum + current.total * 1,
+      0
     );
+    dataset.unshift({ expenses: totalExp, incomes: totalInc });
     tableData.unshift({
       incomes: incomesForPeriod,
       expenses: expensesForPeriod,
@@ -155,8 +151,7 @@ export const getDataForExpenseIncomeChart = (
   }
   const result = {
     xAxis: dateArr,
-    expenses: totalExp,
-    incomes: totalInc,
+    dataset: dataset,
     tableData: tableData,
   };
   // console.log(result);
