@@ -1,13 +1,15 @@
 import { Link } from "react-router-dom";
-import { useAppSelector } from "../../hooks/reduxHooks";
-import { getIsLoggedIn } from "../../store/users";
+import { useAppSelector } from "../../../hooks/reduxHooks";
+import { getIsLoggedIn } from "../../../store/users";
 import NavProfile from "./NavProfile";
+import styles from "./Navigation.module.css";
+import classNames from "classnames";
 
 const Navigation = () => {
   const isLoggedIn = useAppSelector(getIsLoggedIn());
-
+  const navBarClass = classNames(styles.navbar, "navbar p-4 w-full");
   return (
-    <nav className="navbar mb-3 tw-bg-gradient-to-r tw-from-teal-400 tw-to-blue-500 p-4 w-full">
+    <nav className={navBarClass}>
       <div className="container-lg">
         <div className="d-flex justify-content-between">
           <div className="d-flex align-self-center me-3 tw-border-r-2 p-2">

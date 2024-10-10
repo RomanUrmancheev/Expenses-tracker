@@ -1,8 +1,10 @@
 import { useState } from "react";
 import { Link } from "react-router-dom";
-import { getUser, logOut } from "../../store/users";
-import { useAppDispatch, useAppSelector } from "../../hooks/reduxHooks";
-import { IUser } from "../../interfaces";
+import { getUser, logOut } from "../../../store/users";
+import { useAppDispatch, useAppSelector } from "../../../hooks/reduxHooks";
+import { IUser } from "../../../interfaces";
+import classNames from "classnames";
+import styles from "./Navigation.module.css";
 
 const NavProfile = () => {
   const dispatch = useAppDispatch();
@@ -11,6 +13,15 @@ const NavProfile = () => {
   const toggleMenu = () => {
     setIsOpen((prevState) => !prevState);
   };
+
+  const navProfileClass = classNames(
+    "w-100 dropdown-menu",
+    {
+      show: isOpen,
+    },
+    styles.dropdown
+  );
+  const dropdown = classNames("dropdown-item text-white", styles.dropdownItem);
 
   if (!currentUser) return "Loading...";
   return (
@@ -29,12 +40,12 @@ const NavProfile = () => {
           alt="avatar"
         ></img>
       </div>
-      <div className={"w-100 dropdown-menu" + (isOpen ? " show" : "")}>
-        <Link className="dropdown-item" to={`/users/${currentUser._id}`}>
+      <div className={navProfileClass}>
+        <Link className={dropdown} to={`/users/${currentUser._id}`}>
           Profile
         </Link>
         <a
-          className="dropdown-item"
+          className={dropdown}
           onClick={() => dispatch(logOut())}
           type="button"
         >

@@ -1,0 +1,39 @@
+.card {
+  background: #fff;
+  background: linear-gradient(
+    to right bottom,
+    rgba(255, 255, 255, 0.4),
+    rgba(255, 255, 255, 0.1)
+  ) !important;
+  backdrop-filter: blur(4px);
+  box-shadow: 0 0 5px 0 rgba(22, 22, 22, 0.2);
+  border-radius: 10px !important;
+  z-index: 2;
+  margin-top: 70px !important;
+}
+.button {
+  text-align: center;
+  /* background: linear-gradient(to right bottom, #4fc3f7, #00bcd4); */
+  color: #fff;
+  width: 100%;
+  border-radius: 0px !important;
+  border-bottom-right-radius: 10px !important;
+  border-bottom-left-radius: 10px !important;
+}
+
+.button:hover {
+  background: linear-gradient(to right bottom, #ee02e6, #ff7c5e);
+}
+
+.list {
+  color: #fff !important;
+  background: #fff;
+  font-weight: 600;
+  background: linear-gradient(
+    to right,
+    rgba(240, 240, 240, 0.1),
+    rgba(240, 240, 240, 0.4)
+  ) !important;
+  backdrop-filter: blur(4px);
+  z-index: 2;
+}

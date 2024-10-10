@@ -81,7 +81,6 @@ export interface IMainCard {
   name: string;
   link: string;
   listLink: string;
-  bgColor: string;
   data: ITransaction[] | IBankAccount[];
 }
 

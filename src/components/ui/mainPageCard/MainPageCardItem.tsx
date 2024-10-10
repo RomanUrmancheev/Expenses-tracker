@@ -1,4 +1,6 @@
-import { IMainPageCardItem } from "../../interfaces";
+import classNames from "classnames";
+import { IMainPageCardItem } from "../../../interfaces";
+import style from "./MainPageCard.module.css";
 
 const MainPageCardItem = ({ data }: IMainPageCardItem) => {
   const getClassName = (value: number) => {
@@ -7,12 +9,13 @@ const MainPageCardItem = ({ data }: IMainPageCardItem) => {
     }
     return "tw-font-bold text-center tw-text-3xl tw-font-mono tw-text-green-500";
   };
+  const listStyle = classNames(style.list, "list-group-item");
 
   return (
-    <li className="list-group-item">
+    <li className={listStyle}>
       <div className="d-flex align-items-center justify-content-between">
-        <div> {data.title} </div>
-        <div className={getClassName(data.total)}>{data.total + " $"}</div>
+        <div className="fs-5"> {data.title} </div>
+        <div className={getClassName(data.total)}>{data.total + "$"}</div>
       </div>
     </li>
   );
